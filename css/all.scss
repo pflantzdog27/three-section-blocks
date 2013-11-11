@@ -1,0 +1,191 @@
+// MIXINS
+@mixin transition($property, $time) {
+  -o-transition: $property $time ease;
+  -ms-transition: $property $time ease;
+  -moz-transition: $property $time ease;
+  -webkit-transition: $property $time ease;
+  transition: $property $time ease;
+}
+
+// GLOBAL
+$containerWidth : 990px;
+$sectionTitle : #333;
+$fontColor : #333;
+$gsaBlue : #3a45bf;
+
+// NAVIGATION
+$navFontSize : 20px;
+$navFontColor : blue;
+
+//SECTION VARIABLES
+$minHeight : 200px;
+$backgroundOdd : #ececec;  // background of odd numbered sections
+$backgroundEven : #fff; // background of even numbered sections
+$sectionBorder : 1px dotted #333;
+
+// VERTICAL CAROUSEL
+$stackedCarouselWidth : 33%;
+$stackedItemHeight : 150px;
+$stackedItemBorder : 1px dotted #ccc;
+$stackedItemPadding : 5px;
+$stackedItemFontColor : #333;
+$stackedItemHoverBG : $gsaBlue;
+$stackedItemHoverFontColor : #fff;
+
+// LARGE CONTENT CAROUSEL
+$displayBorder : $gsaBlue;
+$imgOverlayBG : rgba($gsaBlue,0.7);
+$imgOverlayFontColor: #fff;
+
+// HORIZONTAL IMAGE ROW
+$imgWidth : 23%;
+$imgMargin : 0 1%;
+
+// INNER SECTIONS FOR EXPLORE 1800F PAGE
+.section-wrap {
+  width: $containerWidth;
+  margin: 0 auto;
+}
+
+
+
+// EXPLORE 1800F PAGE
+#navigation-section {
+      li {
+        list-style: none;
+        float: left;
+        width: 290px;
+        text-align: center;
+        font: {
+          size: $navFontSize;
+        }
+          a {
+            color: $navFontColor;
+            padding-bottom: 130px;
+            background: url(../images/green.svg)no-repeat center bottom;
+            display: block;
+          }
+      }
+}
+.explore-section {
+  width: $containerWidth;
+  margin: 0 auto;
+  background: $backgroundEven;
+  position: relative;
+  min-height: $minHeight;
+  padding: 20px;
+  border-bottom: $sectionBorder;
+    h2 {
+      color: $sectionTitle;
+      text-transform:uppercase;
+    }
+    .section-loading {
+      width: 100%;
+      height: 100%;
+      background: url(../images/loading.gif)no-repeat center;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+}
+.odd {
+  background: $backgroundOdd;
+}
+
+// FAST FACTS
+#fast-facts-section {
+    .fast-fact-item {
+      display: none;
+    }
+    .display-fact{
+      display: block;
+    }
+}
+
+// ARCHITECTURE
+#stacked-carousel {
+  float: left;
+  width: $stackedCarouselWidth;
+  height: ($stackedItemHeight * 3) +2;
+  border: 1px solid $displayBorder;
+  overflow: hidden;
+    .architecture-item {
+      height: $stackedItemHeight;
+      overflow: hidden;
+      color: $stackedItemFontColor;
+      border-bottom: $stackedItemBorder;
+      padding-top: $stackedItemPadding;
+      padding-bottom: $stackedItemPadding;
+      cursor: pointer;
+      @include transition(all,.5s);
+        &:hover {
+          background: $stackedItemHoverBG;
+          color: $stackedItemHoverFontColor;
+        }
+        img {
+          float: left;
+          width: 48%;
+          margin-right: 2%;
+          max-height: 100%;
+          max-width: 100%;
+        }
+      .item-content {
+        width: 50%;
+        float: right;
+      }
+    }
+    .active-item {
+      background: $stackedItemHoverBG;
+      color: $stackedItemHoverFontColor;
+    }
+}
+#large-display-block {
+  width: 66%;
+  height: ($stackedItemHeight*3)+2;
+  float: left;
+  border: 1px solid $displayBorder;
+  overflow: hidden;
+  position: relative;
+    .architecture-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+        .item-content {
+          position: absolute;
+          bottom: 0;
+          background: $imgOverlayBG;
+          padding: 8px 3% 18px;
+          width: 100%;
+          color: $imgOverlayFontColor;
+        }
+    }
+}
+.carousel-nav {
+  position: absolute;
+  top: 50%;
+  margin-top: -24px;
+  display: none;
+  width: 28px;
+  height: 48px;
+  z-index: 1;
+  cursor: pointer;
+}
+.next {
+  background: url(../images/slide-right.png)no-repeat 0 0;
+  right: 40px;
+}
+.prev {
+  background: url(../images/slide-left.png)no-repeat 0 0;
+  left: $stackedCarouselWidth +2;
+}
+
+// MOVE GSA
+#gsa-move-container {
+      img {
+        max-width: $imgWidth;
+        margin: $imgMargin;
+        float: left;
+      }
+}
+
