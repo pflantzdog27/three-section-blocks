@@ -101,9 +101,9 @@ function manualRotation () {
 
     $('.carousel-nav').click(function() {
         var items = $('#stacked-carousel > div').length;
+        var eqPosition = $('.active-item').index();
         if($(this).hasClass('next')){
             var direction = $('.active-item').next('div');
-            var eqPosition = $('.active-item').index();
             $('#stacked-carousel > div').removeClass('active-item');
             $('#large-display-block > div').fadeOut(1);
             $('#large-display-block > div').eq(eqPosition+1).fadeIn(500);
@@ -111,9 +111,10 @@ function manualRotation () {
                     $('#stacked-carousel > div').eq(eqPosition-2).slideUp(100);
                 }
             direction.addClass('active-item');
+            removeControl(0,'.prev',eqPosition);
+            removeControl(items-2,'.next',eqPosition);
         } else {
             var direction = $('.active-item').prev('div');
-            var eqPosition = $('.active-item').index();
             $('#stacked-carousel > div').removeClass('active-item');
             $('#large-display-block > div').fadeOut(1);
             $('#large-display-block > div').eq(eqPosition-1).fadeIn(500);
@@ -121,19 +122,23 @@ function manualRotation () {
                     $('#stacked-carousel > div').eq(eqPosition-1).slideDown(100);
                 }
             direction.addClass('active-item');
+            removeControl(1,'.prev',eqPosition);
+            removeControl(items,'.next',eqPosition);
         }
-        var test = $('#stacked-carousel > div').eq(items-1);
-        console.log(test);
-        console.log(items-1)
-        if(test.hasClass('active-item')){
-            $('.next').fadeOut(300);
-        } else {
-            $('.next').css('display','block');
-        }
+        console.log(eqPosition)
+        console.log(items-2)
+
         clearInterval(autoRotate);
     })
 }
 
+function removeControl(arg, element, eqPosition){
+    if(eqPosition == arg) {
+        $(element).css('visibility','hidden');
+    } else {
+        $(element).css('visibility','visible');
+    }
+}
 
 
 
